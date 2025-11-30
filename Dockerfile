@@ -28,7 +28,8 @@ RUN pip install --upgrade pip setuptools wheel \
 
 # Copy pyproject and lockfile first to leverage build cache
 COPY pyproject.toml /app/
-COPY uv.lock* /app/  # if no lock exists, this COPY will be ignored
+# if no lock exists, this COPY will be ignored
+COPY uv.lock* /app/  
 
 # Install project dependencies into system environment
 # Note: If you don't use 'uv', replace this with your preferred install command (pip/poetry/hatch)
