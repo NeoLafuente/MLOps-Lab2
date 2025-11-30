@@ -1,0 +1,18 @@
+# Ignore git, local env, caches and large data/models
+.git
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+venv/
+.venv/
+.envrc
+*.log
+dist/
+build/
+*.egg-info
+data/
+models/
+tests/
+.ipynb_checkpoints
