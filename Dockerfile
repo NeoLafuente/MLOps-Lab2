@@ -1,9 +1,5 @@
-# Multi-stage Dockerfile (uv-based dependency install)
-# Build:  docker build -t mlops-lab2:latest .
-# Run:    docker run --rm -p 8000:8000 -e APP_MODULE="api.api:app" mlops-lab2:latest
-
 # Base used by both stages (keeps image lineage consistent)
-FROM python:3.12-slim AS base
+FROM python:3.13-slim AS base
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -11,10 +7,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-# Builder stage: install build dependencies and install project deps into system site-packages
+# Install uv and the dependencies of the project
 FROM base AS builder
 
-# Install system build deps only in builder
+# Install system build deps only in builder. TODO: remove "git \" ?
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     libjpeg-dev \
@@ -28,11 +24,9 @@ RUN pip install --upgrade pip setuptools wheel \
 
 # Copy pyproject and lockfile first to leverage build cache
 COPY pyproject.toml /app/
-# if no lock exists, this COPY will be ignored
-COPY uv.lock* /app/  
-
+# Copy the lock file if exists
+COPY uv.lock* /app/
 # Install project dependencies into system environment
-# Note: If you don't use 'uv', replace this with your preferred install command (pip/poetry/hatch)
 RUN uv pip install --system --no-cache .
 
 # Runtime stage: smaller image without build tools
