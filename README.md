@@ -1,4 +1,4 @@
-[![CI](https://github.com/NeoLafuente/MLOps-Lab2/actions/workflows/CI.yml/badge.svg)](https://github.com/NeoLafuente/MLOps-Lab1/actions/workflows/CI.yml)
+[![CI](https://github.com/NeoLafuente/MLOps-Lab2/actions/workflows/CI.yml/badge.svg)](https://github.com/NeoLafuente/MLOps-Lab2/actions/workflows/CI.yml)
 
 # MLOps Lab 1–3
 
