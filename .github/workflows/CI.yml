@@ -54,7 +54,7 @@ jobs:
       - name: Trigger Render deploy
         run: |
           curl -X POST \
-            "https://api.render.com/deploy/{{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_DEPLOY_HOOK_KEY }}"
+            "https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_DEPLOY_HOOK_KEY }}"
 
   deploy_hf_app:
     name: Deploy HuggingFace Space
